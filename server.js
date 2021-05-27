@@ -40,17 +40,20 @@ app.post("/api/notes", (request, response) => {
 });
 
 // deletes the notes on frontend
-app.delete("/api/notes/${id}");
-// (request, response) => {
-//   fs.unlink("/api/notes/:id", (error) => {
-//     if (error) throw error;
-//     console.log("successfully deleted /api/notes/:id");
-//   });
-//   response.json(savedNote);
-// });
+app.delete("/api/notes/:id", (request, response) => {
+  const noteId = request.params.id;
+
+  fs.readFile("./db/db.json", (error, data) => {
+    if (error) throw error;
+    let noteDbArray = JSON.parse(data);
+    const newNoteDbArray = noteDbArray.filter((note) => note.id !== noteId);
+
+            fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
+              if (error) throw error;
+              console.log(`\nNote ID: ${noteId} DELETED!`);
+            });
+  });
+  response.end();
+});
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
-
-//get delete to work
-//for delete console log reqest.params.id to get the correct id for
-//deploy on heroku
