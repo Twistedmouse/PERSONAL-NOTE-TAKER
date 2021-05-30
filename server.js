@@ -1,7 +1,6 @@
 const express = require("express");
 const { nanoid } = require("nanoid"); //requires package to generate random id
 const fs = require("fs");
-const { unlink } = require("fs");
 const app = express(); // The app object is the core object of an Express app. app object is instantiated on creation of the Express server
 const PORT = process.env.PORT || 3001; //uses either enviroment port(heroku) or our port
 const path = require("path");
@@ -51,9 +50,11 @@ app.delete("/api/notes/:id", (request, response) => {
             fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
               if (error) throw error;
               console.log(`\nNote ID: ${noteId} DELETED!`);
+              console.log(newNoteDbArray)
+              console.log(noteDbArray)
             });
   });
-  response.end();
+  response.json(noteId);
 });
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
