@@ -47,14 +47,12 @@ app.delete("/api/notes/:id", (request, response) => {
     let noteDbArray = JSON.parse(data);
     const newNoteDbArray = noteDbArray.filter((note) => note.id !== noteId);
 
-            fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
-              if (error) throw error;
-              console.log(`\nNote ID: ${noteId} DELETED!`);
-              console.log(newNoteDbArray)
-              console.log(noteDbArray)
-            });
+    fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
+      if (error) throw error;
+      console.log(`\nNote ID: ${noteId} DELETED!`);
+    });
   });
-  response.json(noteId);
+  response.json({ ok: true })
 });
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
