@@ -50,9 +50,10 @@ app.delete("/api/notes/:id", (request, response) => {
     fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
       if (error) throw error;
       console.log(`\nNote ID: ${noteId} DELETED!`);
+      console.log(newNoteDbArray);
     });
   });
-  response.json({ ok: true })
+  response.json({ ok: true });
 });
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
