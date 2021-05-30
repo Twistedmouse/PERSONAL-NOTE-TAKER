@@ -70,11 +70,11 @@ This application requires an npm install and uses express.
 
 ## TESTS:
 
-I havnt run any tests in a test enviroment, but I have run tests through my browser. I found it all works as intended, although the delete function dosnt fully run until the server is restarted. 
+I havnt run any tests in a test enviroment, but I have run tests through my browser. <s>I found it all works as intended, although the delete function dosnt fully run until the server is restarted. </s>
 
 ![](Assets/deleteError.png)
 
-My server terminal says the object is deleted, but the note remains until I restart the server completely. 
+<s> My server terminal says the object is deleted, but the note remains until I restart the server completely.</s>
 
 ## DEMO:
 
@@ -97,7 +97,8 @@ or send an email at mousy93@hotmail.com
 
 ## FUTURE PLANS:
 
-I plan to look into the delete function issues and find a fix.
+I plan to look into the delete function issues and find a fix. <br>
+<b>SOLVED.</b>
 
 
 ---

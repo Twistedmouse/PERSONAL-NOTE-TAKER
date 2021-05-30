@@ -44,7 +44,7 @@ app.delete("/api/notes/:id", (request, response) => {
 
   fs.writeFile("./db/db.json", JSON.stringify(notesDb), (error) => {
     if (error) throw error;
-    console.log(`\nNote ID: ${notesDb} DELETED!`);
+    console.log(`\nNote ID: ${request.params.id} DELETED!`);
   });
   response.status(200).json(notesDb);
 });
