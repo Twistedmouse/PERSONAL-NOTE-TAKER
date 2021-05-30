@@ -40,20 +40,31 @@ app.post("/api/notes", (request, response) => {
 
 // deletes the notes on frontend
 app.delete("/api/notes/:id", (request, response) => {
-  const noteId = request.params.id;
+  notesDb = notesDb.filter((note) => note.id !== request.params.id);
 
-  fs.readFile("./db/db.json", (error, data) => {
+  fs.writeFile("./db/db.json", JSON.stringify(notesDb), (error) => {
     if (error) throw error;
-    let noteDbArray = JSON.parse(data);
-    const newNoteDbArray = noteDbArray.filter((note) => note.id !== noteId);
-
-    fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
-      if (error) throw error;
-      console.log(`\nNote ID: ${noteId} DELETED!`);
-      console.log(newNoteDbArray);
-    });
+    console.log(`\nNote ID: ${notesDb} DELETED!`);
   });
-  response.json({ ok: true });
+  response.status(200).json(notesDb);
 });
+
+//first attempt deleted object but didnt remove note from list until server restarted
+// app.delete("/api/notes/:id", (request, response) => {
+//   const noteId = request.params.id;
+
+//   fs.readFile("./db/db.json", (error, data) => {
+//     if (error) throw error;
+//     let noteDbArray = JSON.parse(data);
+//     const newNoteDbArray = noteDbArray.filter((note) => note.id !== noteId);
+
+//     fs.writeFile("./db/db.json", JSON.stringify(newNoteDbArray), (error) => {
+//       if (error) throw error;
+//       console.log(`\nNote ID: ${noteId} DELETED!`);
+//       console.log(newNoteDbArray);
+//     });
+//   });
+//   response.json({ ok: true });
+// });
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
