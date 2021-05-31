@@ -29,7 +29,7 @@ app.post("/api/notes", (request, response) => {
   };
   console.log(savedNote);
   notesDb.push(savedNote); //<-- updates instance dosnt write
-  /*writes the updated notes from json */
+  /*v--writes the updated notes from json */
   fs.writeFile("./db/db.json", JSON.stringify(notesDb), (error) => {
     if (error) {
       throw error;
